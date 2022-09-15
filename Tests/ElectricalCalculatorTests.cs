@@ -9,13 +9,13 @@ namespace Tests
         public void CorrectWattage()
         {
             // Arrange:
-            ElectricalCalculator ec = new();
             double current = 2.0;
             double voltage = 230.0;
+            ElectricalCalculator ec = new(voltage);
             double expectedWattage = 460.0;
 
             // Act:
-            double actualWattage = ec.Wattage(voltage, current);
+            double actualWattage = ec.Wattage(current);
 
             // Assert:
             Assert.Equal(expectedWattage, actualWattage);
@@ -25,12 +25,12 @@ namespace Tests
         public void ExceptionOnIncorrectVoltage_Wattage()
         {
             // Arrange:
-            ElectricalCalculator ec = new();
             double current = 2.0;
             double voltage = -230.0;
+            ElectricalCalculator ec = new(voltage);
 
             // Actsert:
-            Assert.Throws<ArgumentOutOfRangeException>(() => ec.Wattage(voltage, current));
+            Assert.Throws<ArgumentOutOfRangeException>(() => ec.Wattage( current));
         }
     }
 }
